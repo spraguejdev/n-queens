@@ -79,12 +79,29 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+
+      var rows = this.rows();
+      
+      var rowResults = rows[rowIndex].reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;       
+      }, 0);
+      
+      if (rowResults > 1) { return true; }
+    
+      return false; 
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      
+      var rows = this.rows();
+      for (let i = 0; i < rows.length; i++) {
+        if (this.hasRowConflictAt(i)) {
+          return true; 
+        }
+      }
+  
+      return false; 
     },
 
 
@@ -94,12 +111,37 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+
+      var rows = this.rows();
+      var count = 0; 
+      
+      for (let i = 0; i < rows.length; i++) {
+        let position = rows[i][colIndex];
+        if (position === 1) { count += 1; }
+
+      }
+      if (count > 1) { return true; }
+      
+      return false; //
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      
+      var rows = this.rows();
+      var count = 0; 
+
+      for (let i = 0; i < rows.length; i++) {
+        var columnPosition = i;
+        for (let j = 0; j < rows.length; j++) {
+          if (rows[j][columnPosition] === 1) { count += 1}
+          if (count > 1) { return true; }
+        }
+        
+        count = 0; 
+      }
+
+      return false; 
     },
 
 
