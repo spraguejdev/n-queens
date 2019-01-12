@@ -165,6 +165,7 @@
         currentColumn++;
         currentRow++;
       } 
+
       if (count > 1 ) { return true; }
       return false; 
     },
@@ -172,7 +173,7 @@
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
       var rows = this.rows();
-      var i = ((rows.length - 1) * -1)
+      var i = ((rows.length - 1) * -1);
       for (i; i < rows.length; i++) {
        
         if (this.hasMajorDiagonalConflictAt(i)) {
@@ -186,6 +187,13 @@
       if (!this.hasRowConflictAt(rowIndex) && !this.hasColConflictAt(colIndex)) {
         return true; 
       }
+    },
+
+    validQueenMove: function(rowIndex, colIndex) {
+      if (!this.hasAnyRowConflicts() && !this.hasAnyColConflicts() && !this.hasAnyMinorDiagonalConflicts() && !this.hasAnyMajorDiagonalConflicts()) {
+        return true;
+      }
+      return false;
     },
 
 
@@ -209,10 +217,10 @@
       return false; 
     },
 
-    // test if any minor diagonals on this board contain conflicts
+    // test if any minor diagonals on this board contain containonflicts
     hasAnyMinorDiagonalConflicts: function() {
       var rows = this.rows();
-      var length = rows.length + 1; //4
+      var length = rows.length + rows.length; //4
       for (var i = length; i >= 0; i--) {
         if (this.hasMinorDiagonalConflictAt(i)) {
           return true;
