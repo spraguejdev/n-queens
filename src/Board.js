@@ -151,7 +151,20 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+        
+      var currentSpace = majorDiagonalColumnIndexAtFirstRow; 
+      var rows = this.rows();
+      var length = rows.length;
+      var count = 0;
+      var rowIndex = 0
+      
+      while (currentSpace < length) {
+        if (rows[rowIndex][currentSpace] === 1) { count += 1; }
+        currentSpace++;
+        rowIndex++
+      }
+      if (count > 1 ) { return true; }
+      return false; 
     },
 
     // test if any major diagonals on this board contain conflicts
