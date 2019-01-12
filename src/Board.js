@@ -174,7 +174,7 @@
       var rows = this.rows();
       var i = ((rows.length - 1) * -1)
       for (i; i < rows.length; i++) {
-        console.log(i);
+       
         if (this.hasMajorDiagonalConflictAt(i)) {
           return true;
         }       
@@ -182,6 +182,11 @@
       return false; // fixme
     },
 
+    validRookMove: function (rowIndex, colIndex) {
+      if (!this.hasRowConflictAt(rowIndex) && !this.hasColConflictAt(colIndex)) {
+        return true; 
+      }
+    },
 
 
     // Minor Diagonals - go from top-right to bottom-left
